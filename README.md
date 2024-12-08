@@ -28,8 +28,8 @@ To get the project up and running on your local machine, follow these steps:
 ***Option 1:***
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/yourusername/your-portfolio.git
-   cd your-portfolio
+   git clone https://github.com/Jake2508/Tank.git
+   cd Tank
 2. **Open Unity Hub**:
    ```bash
    Open the cloned repo
@@ -52,7 +52,7 @@ Blender - 3D Model Creations
 
 C# - Scripting & Programming 
 
-
 ## Author
-Jake Rose
+***Jake Rose***
+
 Website: [https://jake-rose.com/](https://jake-rose.com/)
