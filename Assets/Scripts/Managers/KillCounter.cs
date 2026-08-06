@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 
 
@@ -6,7 +5,6 @@ public class KillCounter : MonoBehaviour
 {
     public static KillCounter Instance { get; private set; }
 
-    [SerializeField] TextMeshProUGUI killCounterText;
     private int totalKillCount = 0;
 
 
@@ -17,7 +15,10 @@ public class KillCounter : MonoBehaviour
 
     private void UpdateCounterVisual()
     {
-        killCounterText.text = totalKillCount.ToString();
+        if (HudController.Instance != null)
+        {
+            HudController.Instance.SetKills(totalKillCount);
+        }
     }
 
 

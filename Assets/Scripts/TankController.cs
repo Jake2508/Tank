@@ -35,7 +35,6 @@ namespace Tank
         public Transform reticleTransform;
 
         [Header("Health Properties")]
-        [SerializeField] StatusBar healthBar;
         [SerializeField] private int maxHealth = 100;
         private int currentHealth;
         public int armor;
@@ -66,8 +65,10 @@ namespace Tank
         }
 
         private void Start()
-        { 
+        {
             inputs = GetComponent<TankInputs>();
+
+            ReportHealth();
         }
 
         private void Update()
@@ -220,7 +221,16 @@ namespace Tank
                     //Debug.Log("DEAD - Game Over");
                     GameManager.Instance.Death();
                 }
-                healthBar.SetState(currentHealth, maxHealth);
+                ReportHealth();
+            }
+        }
+
+        /// <summary>Pushes the hull reading to the HUD, which may not be in the scene.</summary>
+        private void ReportHealth()
+        {
+            if (HudController.Instance != null)
+            {
+                HudController.Instance.SetHull(currentHealth, maxHealth);
             }
         }
 
@@ -241,7 +251,7 @@ namespace Tank
                 currentHealth = maxHealth;
             }
 
-            healthBar.SetState(currentHealth, maxHealth);
+            ReportHealth();
         }
 
         public void RegenHeal()
@@ -256,7 +266,7 @@ namespace Tank
             {
                 currentHealth = maxHealth;
             }
-            healthBar.SetState(currentHealth, maxHealth);
+            ReportHealth();
         }
 
         // Pretty messy should refactor/change entirely

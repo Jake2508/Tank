@@ -7,6 +7,7 @@ public class MainMenuUI : MonoBehaviour
     public static MainMenuUI instance { get; private set; }
 
     [SerializeField] Button playButton;
+    [SerializeField] Button settingsButton;
     [SerializeField] Button quitButton;
 
     private Animator animator;
@@ -38,12 +39,17 @@ public class MainMenuUI : MonoBehaviour
     {
         animator.SetTrigger("fadeIn");
 
-        playButton.interactable = true;
-        quitButton.interactable = true;
+        SetInteractable(true);
     }
     public void Hide()
     {
-        playButton.interactable = false;
-        quitButton.interactable = false;
+        SetInteractable(false);
+    }
+
+    private void SetInteractable(bool on)
+    {
+        playButton.interactable = on;
+        quitButton.interactable = on;
+        if (settingsButton) settingsButton.interactable = on;
     }
 }

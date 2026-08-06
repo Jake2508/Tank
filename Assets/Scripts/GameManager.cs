@@ -36,6 +36,13 @@ public class GameManager : MonoBehaviour
     private bool upgradeMenuActive;
     private bool dead = false;
 
+    /// <summary>
+    /// Set by MenuController while the pause band is up. Escape is bound to the Pause
+    /// axis *and* is the menus' back key, so without this one press would both open the
+    /// band and immediately resume back through it.
+    /// </summary>
+    public bool MenuOwnsInput { get; set; }
+
     private enum State
     {
         WaitingToStart,
@@ -67,7 +74,7 @@ public class GameManager : MonoBehaviour
 
     private void Instance_OnPauseAction(object sender, EventArgs e)
     {
-        if(upgradeMenuActive || dead)
+        if(upgradeMenuActive || dead || MenuOwnsInput)
         {
             return;
         }

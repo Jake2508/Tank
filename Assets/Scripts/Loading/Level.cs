@@ -1,13 +1,9 @@
-using TMPro;
 using UnityEngine;
 
 
 public class Level : MonoBehaviour
 {
     public static Level Instance { get; private set; }
-
-    [SerializeField] StatusBar expBar;
-    [SerializeField] TextMeshProUGUI levelText;
 
     int level = 1;
     int experience = 0;
@@ -32,7 +28,8 @@ public class Level : MonoBehaviour
 
     private void Start()
     {
-        expBar.SetState(experience, TO_LEVEL_UP);
+        ReportProgress();
+        SetLevelText();
     }
 
 
@@ -89,18 +86,37 @@ public class Level : MonoBehaviour
 
         if(level == 13)
         {
-            expBar.SetState(TO_LEVEL_UP, TO_LEVEL_UP);
+            ReportProgress(1f);
         }
         else
         {
-            expBar.SetState(experience, TO_LEVEL_UP);
+            ReportProgress();
         }
     }
 
 
+    /// <summary>Pushes XP to the HUD, which may not be in the scene.</summary>
+    private void ReportProgress()
+    {
+        ReportProgress(TO_LEVEL_UP <= 0 ? 0f : (float)experience / TO_LEVEL_UP);
+    }
+
+    private void ReportProgress(float normalised)
+    {
+        if (HudController.Instance != null)
+        {
+            HudController.Instance.SetXp(normalised);
+        }
+    }
+
     private void SetLevelText()
     {
-        levelText.text = (level-1).ToString();
+        // The HUD chip shows the run level itself; the game-over screen keeps its own
+        // "levels gained" reading, which is where the -1 belonged.
+        if (HudController.Instance != null)
+        {
+            HudController.Instance.SetLevel(level);
+        }
     }
 
 
