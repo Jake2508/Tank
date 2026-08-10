@@ -138,6 +138,11 @@ public class MenuFocusGroup : MonoBehaviour
         next = Mathf.Clamp(next, 0, Mathf.Max(0, items.Count - 1));
         if (next == index && Current() != null && Current().IsFocused) return;
 
+        // Only once the menu is up and the highlight actually moves - opening a menu
+        // should not click, and neither should re-asserting the current item.
+        if (open && next != index && SoundManager.Instance != null)
+            SoundManager.Instance.PlayUiMove();
+
         index = next;
         for (int i = 0; i < items.Count; i++)
             if (items[i] != null) items[i].SetFocused(i == index);

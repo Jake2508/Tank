@@ -113,8 +113,6 @@ public class MenuController : MonoBehaviour
         // The slot punch and pip flash already live in HudController.
         var hud = HudController.Instance;
         if (hud != null) hud.SetUpgrade(type, tier);
-
-        PlayButtonSound();
     }
 
     void OnUpgradeClosed()
@@ -155,8 +153,6 @@ public class MenuController : MonoBehaviour
     /// <summary>The band has finished sliding out; hand the clock back.</summary>
     void OnPauseResumed()
     {
-        PlayButtonSound();
-
         var game = GameManager.Instance;
         if (game != null && game.IsGamePaused()) game.TogglePauseGame();
     }
@@ -173,6 +169,9 @@ public class MenuController : MonoBehaviour
         var hud = HudController.Instance;
         if (hud != null) hud.SetHidden(true);
 
+        var music = MusicDirector.Instance;
+        if (music != null) music.SetDucked(true);
+
         Time.timeScale = 0f;
         if (endScreen != null) endScreen.ShowGameOver(RunStats.Capture());
     }
@@ -184,6 +183,9 @@ public class MenuController : MonoBehaviour
         var hud = HudController.Instance;
         if (hud != null) hud.SetHidden(true);
 
+        var music = MusicDirector.Instance;
+        if (music != null) music.SetDucked(true);
+
         Time.timeScale = 0f;
         if (endScreen != null) endScreen.ShowWin(RunStats.Capture());
     }
@@ -191,8 +193,6 @@ public class MenuController : MonoBehaviour
     /// <summary>RETRY after a death, CONTINUE after a win - the same button slot.</summary>
     void OnEndPrimary()
     {
-        PlayButtonSound();
-
         var game = GameManager.Instance;
         if (game != null && game.IsDead())
         {
@@ -206,6 +206,9 @@ public class MenuController : MonoBehaviour
 
         var hud = HudController.Instance;
         if (hud != null) hud.SetHidden(false);
+
+        var music = MusicDirector.Instance;
+        if (music != null) music.SetDucked(false);
     }
 
     // =========================================================================
@@ -214,13 +217,11 @@ public class MenuController : MonoBehaviour
 
     void RestartRun()
     {
-        PlayButtonSound();
         Load(SceneManager.GetActiveScene().buildIndex);
     }
 
     void GoToMainMenu()
     {
-        PlayButtonSound();
         Load(MainMenuBuildIndex);
     }
 
@@ -248,11 +249,10 @@ public class MenuController : MonoBehaviour
     {
         var hud = HudController.Instance;
         if (hud != null) hud.SetDimmed(alpha < 1f);
-    }
 
-    static void PlayButtonSound()
-    {
-        var sound = SoundManager.Instance;
-        if (sound != null) sound.PlayButtonSound();
+        // The music drops under any menu and comes back with gameplay, so a screen that
+        // freezes the game does not leave the track competing with it.
+        var music = MusicDirector.Instance;
+        if (music != null) music.SetDucked(alpha < 1f);
     }
 }

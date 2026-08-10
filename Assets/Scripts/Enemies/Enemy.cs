@@ -100,10 +100,14 @@ public class Enemy : MonoBehaviour, IDamagable, ISetTarget
         {
             alive = false;
 
-            // Add Kill 
+            // Add Kill
             KillCounter.Instance.AddKill();
             // Do Visual
             PostDamage(transform.position);
+
+            // A couple of frames of held time and a shove to the camera. Without this a
+            // kill is just an object disappearing.
+            if (GameFeel.Instance != null) GameFeel.Instance.Kill(transform.position);
             // Check Drop
             GetComponent<DropOnDestroy>().CheckDrop();
             Instantiate(EnemyExplode, transform.position, transform.rotation);

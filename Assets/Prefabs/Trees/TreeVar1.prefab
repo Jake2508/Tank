@@ -9,7 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 839571548494428326}
-  m_Layer: 0
+  - component: {fileID: 3289592654131471794}
+  - component: {fileID: 877505116319938976}
+  m_Layer: 6
   m_Name: TreeVar1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33,6 +35,41 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3289592654131471794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 66728590233346588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ebe14e1da12db44eaeddcfa366e6742, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  harmlessSpeed: 4
+  fullImpactSpeed: 15
+  maxRamDamage: 8
+  speedRetainedOnRam: 0.45
+  destroyEffect: {fileID: 5553504211715112594, guid: f3b7ab47973d84d428d99ce01573d00a, type: 3}
+  health: 1
+  fallSeconds: 0.55
+  sinkSeconds: 0.35
+  sinkDepth: 2.5
+--- !u!136 &877505116319938976
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 66728590233346588}
+  m_Material: {fileID: 13400000, guid: 32af09cb470b12b44899cf6997f4b2fc, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.6598391
+  m_Height: 8.4555855
+  m_Direction: 1
+  m_Center: {x: 0, y: 2.9825287, z: 0}
 --- !u!1 &1978788116321979568
 GameObject:
   m_ObjectHideFlags: 0
@@ -44,7 +81,7 @@ GameObject:
   - component: {fileID: 5005198515603173667}
   - component: {fileID: 336842422294381430}
   - component: {fileID: 3779814499665794279}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BaseTrunkTrunk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,8 +164,7 @@ GameObject:
   - component: {fileID: 9200870533075843836}
   - component: {fileID: 1822043500035390897}
   - component: {fileID: 996685343770485926}
-  - component: {fileID: 7806136400832431178}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BaseTreeLeaves
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -200,17 +236,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &7806136400832431178
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7443766573689069787}
-  m_Material: {fileID: 13400000, guid: 32af09cb470b12b44899cf6997f4b2fc, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 1
-  m_Height: 4
-  m_Direction: 1
-  m_Center: {x: 0.00012895465, y: 0.3, z: 0}

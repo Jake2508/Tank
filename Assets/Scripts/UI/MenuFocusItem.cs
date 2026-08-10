@@ -74,9 +74,22 @@ public abstract class MenuFocusItem : MonoBehaviour, IPointerEnterHandler, IPoin
         dirty = true;
     }
 
+    /// <summary>
+    /// Whether activating this plays the shared confirm click. True for anything that
+    /// commits to something; false for a slider, which is adjusted rather than confirmed.
+    /// </summary>
+    protected virtual bool PlaysActivateSound => true;
+
     public void Activate()
     {
         if (!interactable) return;
+
+        // Here rather than in each handler: every button and card is activated through
+        // this one method, so the confirm click cannot be forgotten on a new screen or
+        // fire twice when two handlers both react to the same press.
+        if (PlaysActivateSound && SoundManager.Instance != null)
+            SoundManager.Instance.PlayButtonSound();
+
         Activated?.Invoke();
     }
 

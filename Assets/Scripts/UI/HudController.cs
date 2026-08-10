@@ -158,8 +158,14 @@ public class HudController : MonoBehaviour
 
         if (hullValue != null) hullValue.text = Mathf.Max(0, current).ToString();
 
+        bool wasLow = lowHull;
         if (!lowHull && hullTarget <= LowEnter) lowHull = true;
         else if (lowHull && hullTarget >= LowExit) lowHull = false;
+
+        // Once, on the way in. The hysteresis above is what stops this retriggering
+        // every time the hull wobbles either side of the threshold.
+        if (lowHull && !wasLow && SoundManager.Instance != null)
+            SoundManager.Instance.PlayLowHull(transform.position);
 
         if (hullLabel != null) hullLabel.text = lowHull ? "HULL CRITICAL" : "HULL";
     }

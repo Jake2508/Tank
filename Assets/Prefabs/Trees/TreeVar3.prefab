@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2215118217965227853}
   - component: {fileID: 8195379229607516080}
   - component: {fileID: 5069161072395057485}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TreeTrunkDead.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 5052396171218185144}
   - component: {fileID: 761205880779077396}
   - component: {fileID: 1248740146204187097}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TreeTrunkDead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -176,7 +176,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3564891401323866678}
   - component: {fileID: 2040112785890245578}
-  m_Layer: 0
+  - component: {fileID: 688629263413657979}
+  m_Layer: 6
   m_Name: TreeVar3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -217,6 +218,27 @@ CapsuleCollider:
   m_Height: 5.96
   m_Direction: 1
   m_Center: {x: 0, y: 2.4, z: -4.3}
+--- !u!114 &688629263413657979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4193653325816705164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ebe14e1da12db44eaeddcfa366e6742, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  harmlessSpeed: 4
+  fullImpactSpeed: 15
+  maxRamDamage: 8
+  speedRetainedOnRam: 0.45
+  destroyEffect: {fileID: 5553504211715112594, guid: f3b7ab47973d84d428d99ce01573d00a, type: 3}
+  health: 1
+  fallSeconds: 0.55
+  sinkSeconds: 0.35
+  sinkDepth: 2.5
 --- !u!1 &5914007929201788560
 GameObject:
   m_ObjectHideFlags: 0
@@ -228,7 +250,7 @@ GameObject:
   - component: {fileID: 2872842890064163651}
   - component: {fileID: 2884053510862248576}
   - component: {fileID: 1650875464432048831}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TreeTrunkDead.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -311,7 +333,7 @@ GameObject:
   - component: {fileID: 3680559283173737022}
   - component: {fileID: 2278307713485099198}
   - component: {fileID: 637247684394059645}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TreeTrunkDead.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -394,7 +416,7 @@ GameObject:
   - component: {fileID: 3439652516297414150}
   - component: {fileID: 8805163619125426903}
   - component: {fileID: 8479931339637249844}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TreeTrunkDead.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}

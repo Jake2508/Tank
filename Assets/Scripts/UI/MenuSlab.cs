@@ -32,23 +32,66 @@ public class MenuSlab : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     [SerializeField] Vector2 shadowHover = new Vector2(10.5f, -11f);
     [SerializeField] Vector2 shadowPress = new Vector2(3.5f, -3.5f);
 
+    [Header("Availability")]
+    [Tooltip("Alpha for a slab that is unavailable on this platform. Low enough to read " +
+             "as switched off next to a live one, high enough that the label is still " +
+             "legible - a button you cannot read is a button you cannot rule out.")]
+    [Range(0.2f, 1f)]
+    [SerializeField] float unavailableAlpha = 0.42f;
+
     const float Speed = 1f / 0.13f;
     const float ChevronTravel = 4.5f;
     const float ChevronPeriod = 1.1f;
 
     RectTransform rt;
+    CanvasGroup group;
     Vector2 homePos;
     Vector2 chevronHome;
     bool selected, pressed;
+    bool available = true;
 
     public Button Button => button;
-    public bool Interactable => button == null || button.interactable;
+
+    /// <summary>
+    /// Two different kinds of "off", kept apart on purpose.
+    ///
+    /// The Button's own interactable flag is the temporary one - the whole column is
+    /// switched off while the level-select popup owns the screen, and greying the menu
+    /// out every time that happened would read as the menu breaking.
+    ///
+    /// Available is the permanent one: this slab does nothing on this platform and is
+    /// drawn dimmed to say so.
+    /// </summary>
+    public bool Interactable => available && (button == null || button.interactable);
+
+    public bool Available => available;
     public bool IsSelected => selected;
+
+    /// <summary>Greys the slab out and takes it out of the keyboard rotation for good.</summary>
+    public void SetAvailable(bool on)
+    {
+        available = on;
+        if (!on) SetSelected(false);
+
+        // Awake has not run in edit mode, so there is no Update to lerp the alpha.
+        // Setting it outright means an editor capture shows the real state.
+        if (group != null) return;
+
+        group = GetComponent<CanvasGroup>();
+        if (group == null) group = gameObject.AddComponent<CanvasGroup>();
+        group.alpha = on ? 1f : unavailableAlpha;
+    }
 
     void Awake()
     {
         rt = (RectTransform)transform;
         homePos = rt.anchoredPosition;
+
+        // One group rather than a reference to every graphic on the slab: the body,
+        // keyline, label, shadow and key pill all have to dim together, and listing
+        // them would break the moment the builder adds another child.
+        group = GetComponent<CanvasGroup>();
+        if (group == null) group = gameObject.AddComponent<CanvasGroup>();
 
         if (shadow) shadow.anchoredPosition = shadowIdle;
         if (body) body.color = idleTint;
@@ -102,6 +145,8 @@ public class MenuSlab : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         rt.anchoredPosition = Vector2.Lerp(rt.anchoredPosition, target, t);
         if (shadow) shadow.anchoredPosition = Vector2.Lerp(shadow.anchoredPosition, shadowTarget, t);
         if (body) body.color = Color.Lerp(body.color, selected ? hoverTint : idleTint, t);
+
+        if (group) group.alpha = Mathf.Lerp(group.alpha, available ? 1f : unavailableAlpha, t);
 
         if (chevron && selected)
         {
