@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 582732743230021203}
   - component: {fileID: 498129291871145572}
   - component: {fileID: 7823119768381977444}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Des-Floor 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}

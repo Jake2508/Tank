@@ -61,7 +61,7 @@ GameObject:
   - component: {fileID: 1563945341005213289}
   - component: {fileID: 8565121436650631790}
   - component: {fileID: 6079115586318609738}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Des-Floor 6
   m_TagString: Untagged
   m_Icon: {fileID: 0}

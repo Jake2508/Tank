@@ -139,7 +139,7 @@ GameObject:
   - component: {fileID: 2457336048638809053}
   - component: {fileID: 5224893618993591127}
   - component: {fileID: 8000079962889624996}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Des-Floor 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}

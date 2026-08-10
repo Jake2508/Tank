@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 2815625466618166823}
   - component: {fileID: 3146315747759429528}
   - component: {fileID: 6006829657960759958}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Des-Floor 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

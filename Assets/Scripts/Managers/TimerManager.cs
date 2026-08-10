@@ -1,15 +1,9 @@
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 
 public class TimerManager : MonoBehaviour
 {
     public static TimerManager Instance { get; private set; }
-
-    [SerializeField] private TextMeshProUGUI secondsText;
-    [SerializeField] private TextMeshProUGUI minutesText;
-    [SerializeField] private Image timerIcon;
 
     private float currentTime = 0f;
     private float seconds;
@@ -54,11 +48,12 @@ public class TimerManager : MonoBehaviour
 
     private void UpdateUI()
     {
-        secondsText.text = seconds.ToString("00");
-        minutesText.text = minutes.ToString("00");
-
-        timerIcon.fillAmount = seconds / 60;
-        //Debug.Log(seconds);
+        // The HUD only rebuilds its string when the whole second changes, so calling
+        // this on every tick is fine.
+        if (HudController.Instance != null)
+        {
+            HudController.Instance.SetTime(minutes, (int)seconds);
+        }
     }
 
 
